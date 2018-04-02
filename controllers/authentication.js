@@ -38,6 +38,24 @@ function register(req, res) {
   });
 }*/
 
+//check if the user is allowed to view this page
+function checkAuth(req, res, next){
+  console.log(req.path);
+  User.findById(req.session.userId)
+    .exec(function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        if (user === null) {
+          res.render('unauthorized');
+        } else {
+          //take the requested path and remove the / from it to render
+        res.render(req.path.substring('/'.length));
+        }
+      }
+    });
+  }
+
 function login(req, res) {
   var username = req.body.username;
   var password = req.body.password;
@@ -45,7 +63,9 @@ function login(req, res) {
   User.findOne({username: username, password: password}, function(err, result) {
     try{
       if (username === result.username && password === result.password) {
-        res.render('choices');
+        console.log(result)
+        req.session.userId = result._id;
+        return res.redirect('/choices');
       }
     } catch (err) {
       console.log(err);
@@ -58,5 +78,6 @@ function login(req, res) {
 
 module.exports = {
   register: register,
-  login: login
+  login: login,
+  checkAuth: checkAuth
 };

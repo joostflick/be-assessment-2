@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-</head>
+<%- include('head.ejs') %>
 
 <body>
 
-  <form id="choices">
+  <form  action="/choices" method="POST" id="choices">
     <h2 class="titel">Which color suits you best?</h2>
 
     <section>
@@ -66,9 +60,8 @@
   </label>
       </div>
     </section>
-    <button type="button" id="subButton" onclick="choices()">Submit</button>
+    <button type="submit">Submit</button>
   </form>
 </body>
 
-
-</html>
+<%- include('footer.ejs') %>

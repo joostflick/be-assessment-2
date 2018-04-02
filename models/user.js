@@ -11,7 +11,7 @@ var User = new Schema(
     gender: {type: String},
     age: {type: Number},
     matches: [{type: String}],
-    choices: {type: Number},
+    choices: {type: String},
     image: {type: String}
   }
 );

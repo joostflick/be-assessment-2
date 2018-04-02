@@ -1,8 +1,16 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
-a {
-  color: #00B7FF;
+header > a {
+  color: white;
+}
+
+header {
+  padding: 1rem;
+  background-color: grey;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

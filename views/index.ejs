@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+<%- include('head.ejs') %>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <ul>
-      <a href="/login">Sign up</a>
-      <a href="/register">Register</a>
+    <header>
+      <h1>Dilemma Dating</h1>
+      <a href="/login">Login</a>
       <a href="/logout">Log out</a>
-    </ul>
+    </header>
+    <section>
+      <p>If you don't have an account yet, you can <a href="/register">Register</a> here</p>
+      <p>Check out the dilemma's <a href="/choices">here</a></p>
+    </section>
   </body>
-</html>
+<%- include('footer.ejs') %>
