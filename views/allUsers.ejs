@@ -1,12 +1,24 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>all users</title>
-  </head>
-  <body>
-      <%= console.log(User) %>
-      <h1>testje</h1>
-  </body>
-  <script type="text/javascript" src="./routes/users.js"></script>
-</html>
+<!doctype html>
+<html lang=en>
+<meta charset=utf8>
+<meta name=viewport content=width=device-width,initial-scale=1>
+<link rel="shortcut icon" type=image/x-icon href=data:image/x-icon;,>
+<title>Shelter</title>
+<link rel=stylesheet href=/index.css>
+<main>
+  <h1>Shelter</h1>
+  <div class=grid>
+    <% User.forEach(function (user) { %>
+    <article class=user>
+      <a class="frame block-link" href="/<%= user.id %>">
+        <figure class="frame-image frame-image-reveal">
+            <img src="/image/<%= user.image %>.jpg" alt>
+        </figure>
+        <h2><%= user.first_name %></h2>
+        <p class=capitalize><%= user.gender %> · <%= user.age %> years old</p>
+      </a>
+    </article>
+    <% }) %>
+  </div>
+</main>
+<script src=../app.js></script>
