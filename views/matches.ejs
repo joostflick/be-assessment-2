@@ -2,7 +2,10 @@
 <body>
   <h1>Your matches</h1>
 <% matches.forEach(function (user){ %>
-    <p><%= user.first_name %></p>
+  <section class='user'>
+    <h3><%= user.first_name + " " + user.last_name%></h3>
+    <p><%= user.gender %></p>
+  </section>
 <% }); %>
 </body>
 
