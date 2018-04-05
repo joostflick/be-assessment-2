@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var userController = require('../controllers/authentication');
 var User = require('../models/user')
 var choicesController = require('../controllers/choicesController');
+var matchesController = require('../controllers/matches');
 
 
 /* GET home page. */
@@ -17,6 +18,10 @@ router.get('/register', function(req, res, next) {
 
 router.get('/login', function(req, res, next) {
   res.render('login');
+})
+
+router.get('/unauthorized', function(req, res, next){
+  res.render('unauthorized');
 })
 
 
@@ -36,7 +41,8 @@ router.get('/logout', function (req, res, next) {
 
 //inspiration and part of code from: https://medium.com/of-all-things-tech-progress/starting-with-authentication-a-tutorial-with-node-js-and-mongodb-25d524ca0359
 
-router.get('/choices', userController.checkAuth);
+router.get('/choices', userController.choices);
+router.get('/matches', userController.matches);
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Datesite' });

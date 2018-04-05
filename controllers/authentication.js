@@ -16,6 +16,7 @@ function register(req, res) {
         return res.sendStatus(400);
       }
       return res.sendStatus(200);
+      res.redirect('/')
     });
   });
 }
@@ -56,6 +57,28 @@ function checkAuth(req, res, next){
     });
   }
 
+  function choices(req, res, next){
+    sess = req.session;
+//Session set when user Request our app via URL
+  if(sess.userId) {
+    res.render('choices');
+}
+else {
+    res.redirect('unauthorized');
+}
+  }
+
+  function matches(req, res, next){
+    sess = req.session;
+//Session set when user Request our app via URL
+  if(sess.userId) {
+    res.render('matches');
+}
+else {
+    res.redirect('unauthorized');
+}
+  }
+
 function login(req, res) {
   var username = req.body.username;
   var password = req.body.password;
@@ -65,7 +88,7 @@ function login(req, res) {
       if (username === result.username && password === result.password) {
         console.log(result)
         req.session.userId = result._id;
-        return res.redirect('/choices');
+        return res.redirect('/');
       }
     } catch (err) {
       console.log(err);
@@ -79,5 +102,7 @@ function login(req, res) {
 module.exports = {
   register: register,
   login: login,
+  choices: choices,
+  matches: matches,
   checkAuth: checkAuth
 };

@@ -10,12 +10,12 @@ function addChoices(req, res) {
     if (err) {
       return res.sendStatus(400);
     }
-    res.render('users.ejs', { "User": User });
+    res.redirect('/matches');
 
   });
 }
 }
 
 module.exports = {
-  addChoices: addChoices,
+  addChoices: addChoices
 };
