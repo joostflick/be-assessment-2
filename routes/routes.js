@@ -8,8 +8,15 @@ var matchesController = require('../controllers/matches');
 
 
 /* GET home page. */
-router.get('/users', function(req, res, next) {
-  res.render('allUsers');
+router.get('/user/:id', function(req, res, next) {
+  var id = req.params.id;
+  User.findById(id).exec(function (error, user) {
+    if(!user){
+      res.sendStatus(400);
+    } else {
+  res.render('user', {user: user});
+}
+});
 });
 
 router.get('/register', function(req, res, next) {

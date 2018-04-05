@@ -14,3 +14,18 @@ header {
   align-items: center;
   justify-content: space-between;
 }
+
+.userContainer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.user {
+  padding: 2%;
+  width: 40%;
+}
+
+.user > img {
+  width: 50%;
+}
