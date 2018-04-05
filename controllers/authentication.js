@@ -1,5 +1,7 @@
 var User = require('../models/user')
 
+
+
 function register(req, res) {
   var user = req.body;
   return User.findOne({
@@ -72,7 +74,7 @@ else {
     sess = req.session;
 //Session set when user Request our app via URL
   if(sess.userId) {
-    res.render('matches');
+    res.redirect('matches');
 }
 else {
     res.redirect('unauthorized');
