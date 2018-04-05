@@ -1,0 +1,14 @@
+<%- include('head.ejs') %>
+<body>
+  <h1>Your matches</h1>
+<% User.collection.find().forEach(function (user){ %>
+  <% console.log(user.first_name) %>
+    <p><%= user.first_name %></p>
+<% }) %>
+</body>
+<p><%= user.first_name %></p>
+<p><%= user.first_name %></p>
+
+<%- include('footer.ejs') %>
+
+TO ARRAY
