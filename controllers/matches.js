@@ -3,7 +3,7 @@ var User = require('../models/user');
 function findMatches(req, res) {
   var id = req.session.userId;
   if (!req.session){
-    res.sendStatus(400);
+    res.redirect('unauthorized');
   }
   User.findById(id).exec(function (error, user) {
     if(!user){
