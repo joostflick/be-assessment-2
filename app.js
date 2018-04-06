@@ -8,7 +8,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var routes = require('./routes/routes');
-var bcrypt = require('bcrypt');
 
 var app = express();
 

@@ -1,5 +1,5 @@
-var User = require('../models/user')
-
+var User = require('../models/user');
+var bcrypt = require('bcrypt');
 
 
 function register(req, res) {
@@ -13,15 +13,36 @@ function register(req, res) {
     if (result) {
       return res.sendStatus(400);
     }
+    var hash = bcrypt.hashSync(user.password, 10);
+    user.password = hash;
     User.create(user, function(err, newUser) {
       if (err) {
         return res.sendStatus(400);
       }
       return res.sendStatus(200);
-      res.redirect('/')
     });
   });
 }
+
+function login(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+
+  User.findOne({username: username}, function(err, result) {
+    console.log(bcrypt.compareSync(password, hash));
+    try{
+      if (username === result.username && bcrypt.compareSync(password, hash)) {
+        console.log(result)
+        req.session.userId = result._id;
+        return res.redirect('/');
+      }
+    } catch (err) {
+      console.log(err);
+      return res.sendStatus(400);
+    }
+    });
+  }
+
 
 /*function login(req, res) {
   var user = req.body;
@@ -79,24 +100,6 @@ else {
 else {
     res.redirect('unauthorized');
 }
-  }
-
-function login(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-
-  User.findOne({username: username, password: password}, function(err, result) {
-    try{
-      if (username === result.username && password === result.password) {
-        console.log(result)
-        req.session.userId = result._id;
-        return res.redirect('/');
-      }
-    } catch (err) {
-      console.log(err);
-      return res.sendStatus(400);
-    }
-    });
   }
 
 
