@@ -9,6 +9,9 @@ var matchesController = require('../controllers/matches');
 
 /* GET home page. */
 router.get('/user/:id', function(req, res, next) {
+  if(!req.session.userId){
+    res.render('unauthorized');
+  } else {
   var id = req.params.id;
   User.findById(id).exec(function (error, user) {
     if(!user){
@@ -17,6 +20,7 @@ router.get('/user/:id', function(req, res, next) {
   res.render('user', {user: user});
 }
 });
+}
 });
 
 router.get('/register', function(req, res, next) {
@@ -46,13 +50,11 @@ router.get('/logout', function (req, res, next) {
   }
 });
 
-//inspiration and part of code from: https://medium.com/of-all-things-tech-progress/starting-with-authentication-a-tutorial-with-node-js-and-mongodb-25d524ca0359
-
 router.get('/choices', userController.choices);
 router.get('/matches', matchesController.findMatches);
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Datesite' });
+  res.render('index', { title: 'Datesite', session: req.session });
 });
 
 router.post('/register', userController.register);

@@ -7,6 +7,9 @@
       <a href="/logout">Log out</a>
     </header>
     <section>
+      <% if(session.userId){ %>
+        <p>Check out your <a href="/matches">matches</a></p>
+        <% } %>
       <p>If you don't have an account yet, you can <a href="/register">register</a> here</p>
       <p>Check out the dilemma's <a href="/choices">here</a></p>
     </section>

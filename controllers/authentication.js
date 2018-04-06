@@ -27,9 +27,9 @@ function register(req, res) {
 function login(req, res) {
   var username = req.body.username;
   var password = req.body.password;
+  var hash = bcrypt.hashSync(password, 10);
 
   User.findOne({username: username}, function(err, result) {
-    console.log(bcrypt.compareSync(password, hash));
     try{
       if (username === result.username && bcrypt.compareSync(password, hash)) {
         console.log(result)
@@ -43,42 +43,6 @@ function login(req, res) {
     });
   }
 
-
-/*function login(req, res) {
-  var user = req.body;
-  console.log(user.username, user.password);
-
-  User.findOne({
-    username: user.username,
-    password: user.password
-  }, function(err, result) {
-    if (err) {
-      return res.sendStatus(400);
-    }
-    if (!res) {
-      return res.sendStatus(400);
-    }
-    return res.sendStatus(200);
-  });
-}*/
-
-//check if the user is allowed to view this page
-function checkAuth(req, res, next){
-  console.log(req.path);
-  User.findById(req.session.userId)
-    .exec(function (error, user) {
-      if (error) {
-        return next(error);
-      } else {
-        if (user === null) {
-          res.render('unauthorized');
-        } else {
-          //take the requested path and remove the / from it to render
-        res.render(req.path.substring('/'.length));
-        }
-      }
-    });
-  }
 
   function choices(req, res, next){
     sess = req.session;
@@ -108,6 +72,5 @@ module.exports = {
   register: register,
   login: login,
   choices: choices,
-  matches: matches,
-  checkAuth: checkAuth
+  matches: matches
 };
