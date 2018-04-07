@@ -3,11 +3,11 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var userController = require('../controllers/authentication');
 var User = require('../models/user')
-var choicesController = require('../controllers/choicesController');
+var choicesController = require('../controllers/choices');
 var matchesController = require('../controllers/matches');
 
 
-/* GET home page. */
+//Get user detail page if logged in
 router.get('/user/:id', function(req, res, next) {
   if(!req.session.userId){
     res.render('unauthorized');
@@ -36,10 +36,10 @@ router.get('/unauthorized', function(req, res, next){
 })
 
 
-
+//Logout
 router.get('/logout', function (req, res, next) {
   if (req.session) {
-    // delete session object
+    //Delete session object
     req.session.destroy(function (err) {
       if (err) {
         return next(err);
@@ -53,6 +53,7 @@ router.get('/logout', function (req, res, next) {
 router.get('/choices', userController.choices);
 router.get('/matches', matchesController.findMatches);
 
+//Render index and give it req.session to show/hide items based on user status
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Datesite', session: req.session });
 });
@@ -60,6 +61,7 @@ router.get('/', function(req, res, next) {
 router.post('/register', userController.register);
 router.post('/login', userController.login);
 router.post('/choices', choicesController.addChoices);
+router.post('/user:id', matchesController.addConnection);
 
 
 module.exports = router;

@@ -10,7 +10,7 @@ var User = new Schema(
     last_name: {type: String, required: true, max: 100},
     gender: {type: String},
     age: {type: Number},
-    matches: [{type: String}],
+    connections: [{type: String}],
     choices: {type: String},
     image: {type: String}
   }

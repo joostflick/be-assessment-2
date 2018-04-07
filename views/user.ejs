@@ -4,7 +4,10 @@
     <img src="/images/Person-placeholder.jpg" alt="profile picture">
     <h3><%= user.first_name + " " + user.last_name%></h3>
     <p><%= user.gender %></p>
-    <a href="/"><p>I think we are a match!</p></a>
+    <form action="/user:id" method="post">
+      <input type="hidden" name="user" value="<%= user._id %>">
+<button type="submit" name="submitbutton"> Connect! </button>
+    </form>
   </section>
 </body>
 <%- include('footer.ejs') %>
