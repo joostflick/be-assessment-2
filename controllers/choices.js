@@ -1,5 +1,6 @@
 var User = require('../models/user');
 
+//Add users choices to db
 function addChoices(req, res) {
   //Create a string consisting of the 3 choices, for example 101
   var newChoices = req.body.select + req.body.select2 + req.body.select3;

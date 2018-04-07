@@ -1,5 +1,6 @@
 var User = require('../models/user');
 
+//Find users with the same choices as current user
 function findMatches(req, res) {
   var id = req.session.userId;
   //If no session ID is found the user is unauthorized to view this,
@@ -24,13 +25,46 @@ function findMatches(req, res) {
 }
 }
 
+//Add selected user to current user's connections
 function addConnection(req, res) {
-  console.log(req.body.user);
-  var id = req.body.user;
+  //get id of selected user and current user
+  var idConnection = req.body.user;
+  var id = req.session.userId;
+  //find current user and add selected user to connections
+  User.findOneAndUpdate({_id: id}, {$addToSet: {connections: idConnection}}, function(err, doc) {
+    if (err) {
+      return res.sendStatus(400);
+    }
+    res.render("message", {message: "Succesfully added to your connections!", redirect: "/connections"});
 
+  });
 }
+
+function getConnections(req, res) {
+  var id = req.session.userId;
+  //If no session ID is found the user is unauthorized to view this,
+  //if the user is authorized check which user is requesting its connections
+  if (!id){
+    res.redirect('unauthorized');
+  } else {
+  User.findById(id).exec(function (error, user) {
+    //If the user hasn't made any connections yet notify user
+    if (!user.connections){
+      res.render("message", {message: "You don't have any connections yet!", redirect: "/"});
+    } else {
+        User.find( {_id: {$in: user.connections}}, function(err, results){
+          res.render('connections', {connections: results});
+  });
+}
+        });
+      }
+      //Render connections
+  }
+
+
 
 module.exports = {
   findMatches: findMatches,
-  addConnection: addConnection
+  addConnection: addConnection,
+  getConnections: getConnections
 };

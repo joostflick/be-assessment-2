@@ -1,25 +1,17 @@
 var User = require('../models/user');
 var bcrypt = require('bcrypt');
 
-//hash parameter with bcrypt using 10 iterations and an auto generated hash
-function hash(pw){
-  var hash = bcrypt.hashSync(pw, 10);
-  return pw;
-}
-
 //Register function
 function register(req, res) {
   //Get the form data and call them user
   var user = req.body;
   //Check if the username already exists, and if thats the case tell the user.
   return User.findOne({username: user.username}, function(err, name) {
-    console.log(name);
     if (name) {
       res.render("message", {message: "The username " + name.username + " is taken!", redirect: "/register"});
     } else {
-      //Otherwise hash the password and create a user with the input from the form
-      console.log(hash(user.password));
-    user.password = hash(user.password);
+      //Otherwise hash the password (auto generated salt and 10 iterations) and create a user with the input from the form
+    user.password = bcrypt.hashSync(user.password, 10);
     User.create(user, function(err, newUser) {
       if (err) {
         return res.sendStatus(400);
@@ -30,18 +22,20 @@ function register(req, res) {
   });
 }
 
+
 //Login function
 function login(req, res) {
-  //Take username and password from body and hash the password
+  //Take username from body
   var username = req.body.username;
-  var pass = hash(req.body.password);
 
-  //Check if username exists and if it does check username and hashed password
+
+  //Check if username exists and if it does check username and hash
+  //Also initiate a session to further track whether the user is logged in
   User.findOne({username: username}, function(err, result) {
     if(!result){
-      res.render("message", {message: "No user found", redirect: "/login"})
+      res.render("message", {message: "Username " + username + " does not exist", redirect: "/login"})
     } else {
-      if (username === result.username && bcrypt.compareSync(pass, result.password)) {
+      if (username === result.username && bcrypt.compareSync(req.body.password, result.password)) {
         req.session.userId = result._id;
         return res.redirect('/');
       } else {

@@ -1,0 +1,16 @@
+<%- include('head.ejs') %>
+<body>
+  <h1>Your connections</h1>
+  <section class='userContainer'>
+<% connections.forEach(function (user){ %>
+  <section class='user'>
+    <img src="/images/Person-placeholder.jpg" alt="profile picture">
+    <h3><%= user.first_name + " " + user.last_name%></h3>
+    <p><%= user.gender %></p>
+    <a href="/connection/<%=user._id%>">View</a>
+  </section>
+<% }); %>
+</section>
+</body>
+
+<%- include('footer.ejs') %>

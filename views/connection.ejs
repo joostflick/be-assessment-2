@@ -1,0 +1,10 @@
+<%- include('head.ejs') %>
+<body>
+  <section class='user'>
+    <img src="/images/Person-placeholder.jpg" alt="profile picture">
+    <h3><%= user.first_name + " " + user.last_name%></h3>
+    <p><%= user.gender %></p>
+    <p>You and <%= user.first_name %> are connected!</p>
+  </section>
+</body>
+<%- include('footer.ejs') %>

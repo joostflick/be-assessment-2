@@ -23,6 +23,21 @@ router.get('/user/:id', function(req, res, next) {
 }
 });
 
+router.get('/connection/:id', function(req, res, next) {
+  if(!req.session.userId){
+    res.render('unauthorized');
+  } else {
+  var id = req.params.id;
+  User.findById(id).exec(function (error, user) {
+    if(!user){
+      res.sendStatus(400);
+    } else {
+  res.render('connection', {user: user});
+}
+});
+}
+});
+
 router.get('/register', function(req, res, next) {
   res.render('form');
 })
@@ -52,6 +67,7 @@ router.get('/logout', function (req, res, next) {
 
 router.get('/choices', userController.choices);
 router.get('/matches', matchesController.findMatches);
+router.get('/connections', matchesController.getConnections);
 
 //Render index and give it req.session to show/hide items based on user status
 router.get('/', function(req, res, next) {
