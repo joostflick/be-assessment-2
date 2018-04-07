@@ -17,3 +17,12 @@ https://medium.com/of-all-things-tech-progress/starting-with-authentication-a-tu
   - sex
   - image
   - choices
+
+## Using my application:
+First clone this repository, then use npm install in the be-assessment-2 directory.
+
+## Functionality
+- Registering new user
+- Login
+- Choosing between 3 options
+- See who you match with based on those choices

@@ -1,4 +1,4 @@
-var User = require('../models/user');
+var User = require("../models/user");
 
 //Add users choices to db
 function addChoices(req, res) {
@@ -8,17 +8,23 @@ function addChoices(req, res) {
   //If no user is logged on tell them they arent authorized, otherwise find the
   //user that is logged in and set their choices to the choices they just made
   //When the choices are updated redirect the user to their matches
-  if(!id){
-    res.render('unauthorized');
+  if (!id) {
+    res.render("unauthorized");
   } else {
-  User.findOneAndUpdate({_id: id}, {$set: {choices: newChoices}}, function(err, doc) {
-    if (err) {
-      return res.sendStatus(400);
-    }
-    res.redirect('/matches');
+    User.findOneAndUpdate({
+      _id: id
+    }, {
+      $set: {
+        choices: newChoices
+      }
+    }, function(err, doc) {
+      if (err) {
+        return res.sendStatus(400);
+      }
+      res.redirect("/matches");
 
-  });
-}
+    });
+  }
 }
 
 module.exports = {
