@@ -16,9 +16,13 @@ function findMatches(req, res) {
     var choices = user.choices;
     //Find all users with the same choices but a differen id
     User.find({choices: choices, _id: {$ne: user.id}}).exec(function (error, matches) {
+      //Check if there are any matches
+      if (matches[0] != null) {
       //Render matches with the found matches
-      res.render('matches', {matches: matches});
-
+      res.render("matches", {matches: matches});
+    } else {
+      res.render("message", {message: "Apparently no one has the same opinion as you have :(", redirect: "/choices"});
+    }
     });
   }
   });
@@ -52,13 +56,13 @@ function getConnections(req, res) {
     if (!user.connections){
       res.render("message", {message: "You don't have any connections yet!", redirect: "/"});
     } else {
+      //Find and show connections
         User.find( {_id: {$in: user.connections}}, function(err, results){
           res.render('connections', {connections: results});
   });
 }
         });
       }
-      //Render connections
   }
 
 

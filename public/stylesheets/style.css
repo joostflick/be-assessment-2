@@ -1,18 +1,32 @@
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: #7FDBFF;
+  overflow-x: hidden;
+}
+
+header {
+  width:100%;
+  margin-left: -1%;
+  margin-top: 2%;
+  padding: 1rem;
+  background-color: #001f3f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 header > a {
   color: white;
 }
 
-header {
-  padding: 1rem;
-  background-color: grey;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.container {
+  position: fixed;
+ width: 40%;
+ height: 40%;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
 }
 
 .choice{
