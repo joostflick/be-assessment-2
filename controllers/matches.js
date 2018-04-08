@@ -32,8 +32,8 @@ function findMatches(req, res) {
             });
           } else {
             res.render("message", {
-              message: "Apparently no one has the same opinion as you have :(",
-              redirect: "/choices"
+              message: "Apparently no one has the same opinion as you have, if you check back later we might have some new matches for you!",
+              redirect: "/"
             });
           }
         });
@@ -74,8 +74,9 @@ function getConnections(req, res) {
     res.redirect('unauthorized');
   } else {
     User.findById(id).exec(function(error, user) {
+      console.log(user.connections);
       //If the user hasn't made any connections yet notify user
-      if (!user.connections) {
+      if (!user.connections[0]) {
         res.render("message", {
           message: "You don't have any connections yet!",
           redirect: "/"
@@ -95,8 +96,6 @@ function getConnections(req, res) {
     });
   }
 }
-
-
 
 module.exports = {
   findMatches: findMatches,

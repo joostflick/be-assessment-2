@@ -26,3 +26,4 @@ First clone this repository, then use npm install in the be-assessment-2 directo
 - Login
 - Choosing between 3 options
 - See who you match with based on those choices
+- Connecting to your matches

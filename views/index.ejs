@@ -2,18 +2,19 @@
   <body>
     <header>
       <h1>Dating by choices</h1>
-      <h2>Find your soulmate by making some controversial choices</h2>
+      <h2>Find a date that REALLY shares your opinion</h2>
       <a href="/login">Login</a>
       <a href="/logout">Log out</a>
     </header>
     <section>
+      <h3>Find your matches!</h3>
+      <p>Make your choices <a href="/choices">here</a>.</p>
       <% if(session.userId){ %>
-        <p>Check out your <a href="/matches">matches</a></p>
-        <p><a href="/connections">My connections</a></p>
+        <p>Check out your <a href="/matches">matches based on your choices.</a></p>
+        <p><a href="/connections">My connections</a>.</p>
         <% } else {%>
-      <p>If you don't have an account yet, you can <a href="/register">register</a> here</p>
+      <p>If you don't have an account yet, you can <a href="/register">register</a> here, if you do have one: <a href="/login">login</a>.</p>
         <% } %>
-      <p>Check out the dilemma's <a href="/choices">here</a></p>
     </section>
   </body>
 <%- include('footer.ejs') %>
