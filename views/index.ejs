@@ -3,13 +3,16 @@
     <header>
       <h1>Dating by choices</h1>
       <h2>Find a date that REALLY shares your opinion</h2>
+      <% if(session.userId){ %>
+        <a href="/logout">Log out</a>
+        <% } else {%>
       <a href="/login">Login</a>
-      <a href="/logout">Log out</a>
+      <% } %>
     </header>
     <section>
       <h3>Find your matches!</h3>
-      <p>Make your choices <a href="/choices">here</a>.</p>
       <% if(session.userId){ %>
+        <p>Make your choices <a href="/choices">here</a>.</p>
         <p>Check out your <a href="/matches">matches based on your choices.</a></p>
         <p><a href="/connections">My connections</a>.</p>
         <% } else {%>

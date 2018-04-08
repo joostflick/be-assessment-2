@@ -18,6 +18,12 @@ https://medium.com/of-all-things-tech-progress/starting-with-authentication-a-tu
   - image
   - choices
 
+## What did I use:
+- nodejs
+- express
+- mongoose / mongodb
+- bcrypt
+
 ## Using my application:
 First clone this repository, then use npm install in the be-assessment-2 directory.
 
