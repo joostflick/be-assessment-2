@@ -5,6 +5,11 @@
     <h3><%= user.first_name + " " + user.last_name%></h3>
     <p><%= user.gender %></p>
     <p>You and <%= user.first_name %> are connected!</p>
+    <p>Remove <%= user.first_name %> from my connections</p>
+    <form action="/remove:id" method="post">
+    <input type="hidden" name="remove" value="<%= user._id %>">
+<button type="submit" name="submitbutton"> Remove </button>
+  </form>
   </section>
   <a href="/connections">Go back</a>
 </body>

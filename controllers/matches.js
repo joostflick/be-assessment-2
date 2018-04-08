@@ -65,6 +65,17 @@ function addConnection(req, res) {
 
   });
 }
+function removeConnection(req, res) {
+  var idConnection = req.body.remove;
+  var id = req.session.userId;
+  //Update current user and pull the specified connection from the connections array
+  User.update( {_id: id}, { $pullAll: {connections: [idConnection] } }, function (err, doc){
+    res.render("message", {
+      message: "Succesfully removed from your connections",
+      redirect: "/connections"
+    });
+  });
+}
 
 function getConnections(req, res) {
   var id = req.session.userId;
@@ -100,5 +111,6 @@ function getConnections(req, res) {
 module.exports = {
   findMatches: findMatches,
   addConnection: addConnection,
+  removeConnection: removeConnection,
   getConnections: getConnections
 };

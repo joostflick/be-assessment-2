@@ -72,6 +72,7 @@ router.get('/logout', function(req, res, next) {
 router.get('/choices', userController.choices);
 router.get('/matches', matchesController.findMatches);
 router.get('/connections', matchesController.getConnections);
+router.post('/remove:id', matchesController.removeConnection);
 
 //Render index and give it req.session to show/hide items based on user status
 router.get('/', function(req, res, next) {
