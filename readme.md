@@ -15,7 +15,7 @@ After that you'll be able to pick between 3 choices and find out your who your s
 
 ## Functionality
 
-- [x] Registering new user in database
+- [x] Registering a new user in database
 - [x] Password hashing using bcrypt
 - [x] Login
 - [x] Staying logged in using express-sessions
@@ -34,9 +34,9 @@ After that you'll be able to pick between 3 choices and find out your who your s
 ## Some important things I used
 
 - **nodejs** - runtime which was a prerequisite for the course.
-- **express** (and express-generator) - express was a prerequisite, and express-generator produced the core structure and code for the project .
-- **mongoose** / mongodb (storage on mlab) - First of all I used mongodb because it's less strict in its usage than SQL. Also since I was already somewhat familiar with json I figured it'd be easier for me to work with. Secondly on top of that I used mongoose because of my familiarity with JavaScript. Using mongoose felt more like working with objects to me and that made it more intuitive to use.
-Last of all I used mlab so I could use this application without a locally stored database, which made it easy to test for other people without having them install a local database.
+- **express (and express-generator)** - express was a prerequisite, and express-generator produced the core structure and code for the project .
+- **mongoose / mongodb (storage on mlab)** - First of all I used mongodb because it's less strict in its usage than SQL. Also since I was already somewhat familiar with json I figured it'd be easier for me to work with. On top of that I used mongoose, because of my familiarity with JavaScript. Using mongoose felt more like working with objects to me and that made it more intuitive to use.
+Last of all I used mlab so I could use this application without a locally stored database, which made it easy to test for other people without having them install a local database and add my pre-existing users.
 - **bcrypt** - used for hashing the passwords stored on mlab
 
 ## Structure
@@ -46,9 +46,9 @@ source: <https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller>
 
 For this project I used a **model/view/controller** structure (or at least tried to).
 
-I'd say the model consists of ```app.js``` in the home directory and ```routes/routes.js```. The second one of those two mainly updates the views which are located in the ```/views``` directory. ```routes.js``` controls most requests and responses of the application. In the ```routes.js``` file some controllers are called upon. These are ```authentication.js```, ```choices.js``` and ```matches.js```. I tried to keep the bigger functions separated in those three controllers to make help my code stay more organised.
+I'd say the model consists of ```app.js``` in the home directory and ```routes/routes.js```. The second one of those two mainly updates the views which are located in the ```/views``` directory. ```routes.js``` controls most requests and responses of the application. In the ```routes.js``` file some controllers are called upon. These are ```authentication.js```, ```choices.js``` and ```matches.js```. I tried to keep the bigger functions separated in those three controllers to help my code stay more organised.
 
-Although in the future I would likely be able to execute this a lot better, I felt like the structure of my project still helped me maintain overview.
+Although in the future I would likely be able to execute this a lot better, I felt like the structure of my project still helped me maintain (more) overview.
 
 ## These were a big help, and without them I wouldn't have finished this project
 
