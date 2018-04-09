@@ -6,6 +6,13 @@ var User = require('../models/user')
 var choicesController = require('../controllers/choices');
 var matchesController = require('../controllers/matches');
 
+//Render index and give it req.session to show/hide items based on user status
+router.get('/', function(req, res, next) {
+  res.render('index', {
+    title: 'Datesite',
+    session: req.session
+  });
+});
 
 //Get user detail page if logged in
 router.get('/user/:id', function(req, res, next) {
@@ -25,6 +32,7 @@ router.get('/user/:id', function(req, res, next) {
   }
 });
 
+//Get connection detail page if logged in
 router.get('/connection/:id', function(req, res, next) {
   if (!req.session.userId) {
     res.render('unauthorized');
@@ -42,6 +50,7 @@ router.get('/connection/:id', function(req, res, next) {
   }
 });
 
+//Get requests
 router.get('/register', function(req, res, next) {
   res.render('form');
 })
@@ -69,23 +78,17 @@ router.get('/logout', function(req, res, next) {
   }
 });
 
+//Get requests that are forwarded to a controller
 router.get('/choices', userController.choices);
 router.get('/matches', matchesController.findMatches);
 router.get('/connections', matchesController.getConnections);
-router.post('/remove:id', matchesController.removeConnection);
 
-//Render index and give it req.session to show/hide items based on user status
-router.get('/', function(req, res, next) {
-  res.render('index', {
-    title: 'Datesite',
-    session: req.session
-  });
-});
-
+//Post requests that are forwarded to a controller
 router.post('/register', userController.register);
 router.post('/login', userController.login);
 router.post('/choices', choicesController.addChoices);
 router.post('/user:id', matchesController.addConnection);
+router.post('/remove:id', matchesController.removeConnection);
 
 
 module.exports = router;

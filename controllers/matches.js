@@ -6,14 +6,14 @@ function findMatches(req, res) {
   //If no session ID is found the user is unauthorized to view this,
   //if the user is authorized check which user is requesting its matches
   if (!id) {
-    res.redirect("unauthorized");
+    res.redirect('unauthorized');
   } else {
     User.findById(id).exec(function(error, user) {
       //If the user hasn't made any choices notify user
       if (!user.choices) {
-        res.render("message", {
+        res.render('message', {
           message: "You haven't made any choices yet!",
-          redirect: "/"
+          redirect: '/'
         });
       } else {
         var choices = user.choices;
@@ -27,13 +27,13 @@ function findMatches(req, res) {
           //Check if there are any matches
           if (matches[0] != null) {
             //Render matches with the found matches
-            res.render("matches", {
+            res.render('matches', {
               matches: matches
             });
           } else {
-            res.render("message", {
-              message: "Apparently no one has the same opinion as you have, if you check back later we might have some new matches for you!",
-              redirect: "/"
+            res.render('message', {
+              message: 'Apparently no one has the same opinion as you have, if you check back later we might have some new matches for you!',
+              redirect: '/'
             });
           }
         });
@@ -58,21 +58,29 @@ function addConnection(req, res) {
     if (err) {
       return res.sendStatus(400);
     }
-    res.render("message", {
-      message: "Succesfully added to your connections!",
-      redirect: "/connections"
+    //Display success message with link to connections
+    res.render('message', {
+      message: 'Succesfully added to your connections!',
+      redirect: '/connections'
     });
 
   });
 }
+
 function removeConnection(req, res) {
   var idConnection = req.body.remove;
   var id = req.session.userId;
   //Update current user and pull the specified connection from the connections array
-  User.update( {_id: id}, { $pullAll: {connections: [idConnection] } }, function (err, doc){
-    res.render("message", {
-      message: "Succesfully removed from your connections",
-      redirect: "/connections"
+  User.update({
+    _id: id
+  }, {
+    $pullAll: {
+      connections: [idConnection]
+    }
+  }, function(err, doc) {
+    res.render('message', {
+      message: 'Succesfully removed from your connections',
+      redirect: '/connections'
     });
   });
 }
@@ -88,9 +96,9 @@ function getConnections(req, res) {
       console.log(user.connections);
       //If the user hasn't made any connections yet notify user
       if (!user.connections[0]) {
-        res.render("message", {
+        res.render('message', {
           message: "You don't have any connections yet!",
-          redirect: "/"
+          redirect: '/'
         });
       } else {
         //Find and show connections
@@ -99,7 +107,7 @@ function getConnections(req, res) {
             $in: user.connections
           }
         }, function(err, results) {
-          res.render("connections", {
+          res.render('connections', {
             connections: results
           });
         });
@@ -108,6 +116,7 @@ function getConnections(req, res) {
   }
 }
 
+//Export functions for usage in router.js
 module.exports = {
   findMatches: findMatches,
   addConnection: addConnection,

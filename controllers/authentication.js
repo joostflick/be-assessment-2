@@ -1,5 +1,5 @@
-var User = require("../models/user");
-var bcrypt = require("bcrypt");
+var User = require('../models/user');
+var bcrypt = require('bcrypt');
 
 //Register function
 function register(req, res) {
@@ -10,9 +10,9 @@ function register(req, res) {
     username: user.username
   }, function(err, name) {
     if (name) {
-      res.render("message", {
-        message: "The username " + name.username + " is taken!",
-        redirect: "/register"
+      res.render('message', {
+        message: 'The username ' + name.username + ' is taken!',
+        redirect: '/register'
       });
     } else {
       //Otherwise hash the password (auto generated salt and 10 iterations) and create a user with the input from the form
@@ -21,9 +21,9 @@ function register(req, res) {
         if (err) {
           return res.sendStatus(400);
         }
-        res.render("message", {
-          message: "Your account with username " + newUser.username + " is now active",
-          redirect: "/login"
+        res.render('message', {
+          message: 'Your account with username ' + newUser.username + ' is now active',
+          redirect: '/login'
         });
       });
     }
@@ -43,47 +43,47 @@ function login(req, res) {
     username: username
   }, function(err, result) {
     if (!result) {
-      res.render("message", {
-        message: "Username " + username + " does not exist",
-        redirect: "/login"
+      res.render('message', {
+        message: 'Username ' + username + ' does not exist',
+        redirect: '/login'
       });
     } else {
       if (username === result.username && bcrypt.compareSync(req.body.password, result.password)) {
         req.session.userId = result._id;
         return res.redirect('/');
       } else {
-        res.render("message", {
-          message: "Wrong password or username, try again",
-          redirect: "/login"
+        res.render('message', {
+          message: 'Wrong password or username, try again',
+          redirect: '/login'
         });
       }
     }
   });
 }
 
-
+//Authenticate user
 function choices(req, res, next) {
   sess = req.session;
   //Session set when user Request our app via URL
   if (sess.userId) {
-    res.render("choices");
+    res.render('choices');
   } else {
-    res.redirect("unauthorized");
+    res.redirect('unauthorized');
   }
 }
-
+//Authenticate user
 function matches(req, res, next) {
   sess = req.session;
   //Session set when user Request our app via URL
   if (sess.userId) {
-    res.redirect("matches");
+    res.redirect('matches');
   } else {
-    res.redirect("unauthorized");
+    res.redirect('unauthorized');
   }
 }
 
 
-
+//Export functions to be used in routes.js
 module.exports = {
   register: register,
   login: login,

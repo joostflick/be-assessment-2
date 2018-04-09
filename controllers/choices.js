@@ -1,4 +1,4 @@
-var User = require("../models/user");
+var User = require('../models/user');
 
 //Add users choices to db
 function addChoices(req, res) {
@@ -9,7 +9,7 @@ function addChoices(req, res) {
   //user that is logged in and set their choices to the choices they just made
   //When the choices are updated redirect the user to their matches
   if (!id) {
-    res.render("unauthorized");
+    res.render('unauthorized');
   } else {
     User.findOneAndUpdate({
       _id: id
@@ -21,12 +21,13 @@ function addChoices(req, res) {
       if (err) {
         return res.sendStatus(400);
       }
-      res.redirect("/matches");
+      res.redirect('/matches');
 
     });
   }
 }
 
+//Export functions to be used in routes.js
 module.exports = {
   addChoices: addChoices
 };

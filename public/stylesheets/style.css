@@ -5,7 +5,7 @@ body {
 }
 
 header {
-  width:100%;
+  width: 100%;
   margin-left: -1%;
   margin-top: 2%;
   padding: 1rem;
@@ -16,29 +16,29 @@ header {
   justify-content: space-between;
 }
 
-header > a {
+header>a {
   color: white;
   padding-right: 1%;
 }
 
 .container {
-position: fixed;
- width: 40%;
- height: 40%;
- top: 50%;
- left: 50%;
- transform: translate(-50%, -50%);
+  position: fixed;
+  width: 40%;
+  height: 40%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.choice{
+.choice {
   display: flex;
 }
 
-.choice > div{
+.choice>div {
   width: 30%;
 }
 
-.userContainer{
+.userContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -49,6 +49,6 @@ position: fixed;
   width: 40%;
 }
 
-.user > img {
+.user>img {
   width: 50%;
 }
