@@ -33,6 +33,7 @@ After that you'll be able to pick between 3 choices and find out your who your s
 - [ ] The ability to be able to see 'near matches' instead of just people with exactly the same 3 choices
 - [ ] Changing more aspects of your profile than just the choices
 - [ ] Sanitizing form data
+- [ ] When editing choices, have the current choices pre- filled in in the form
 
 ## Some important things I used
 
