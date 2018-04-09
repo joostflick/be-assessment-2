@@ -21,6 +21,7 @@ After that you'll be able to pick between 3 choices and find out your who your s
 - [x] Staying logged in using express-sessions
 - [x] Choosing between 3 options
 - [x] See who you match with based on those choices
+- [x] Edit your choices and find new matches
 - [x] Connecting to your matches
 - [x] Deleting connections
 
@@ -30,6 +31,8 @@ After that you'll be able to pick between 3 choices and find out your who your s
 - [ ] Styling of the whole application, unfortunately I had to spend too much time making sure it even works
 - [ ] More filter options to your matches
 - [ ] The ability to be able to see 'near matches' instead of just people with exactly the same 3 choices
+- [ ] Changing more aspects of your profile than just the choices
+- [ ] Sanitizing form data
 
 ## Some important things I used
 
