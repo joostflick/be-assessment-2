@@ -31,7 +31,7 @@ After that you'll be able to pick between 3 choices and find out your who your s
 - [ ] Styling of the whole application, unfortunately I had to spend too much time making sure it even works
 - [ ] More filter options to your matches
 - [ ] The ability to be able to see 'near matches' instead of just people with exactly the same 3 choices
-- [ ] Changing more aspects of your profile than just the choices
+- [ ] Changing more aspects of your profile than just the choices + own profile page
 - [ ] Sanitizing form data
 - [ ] When editing choices, have the current choices pre- filled in in the form
 
@@ -42,6 +42,7 @@ After that you'll be able to pick between 3 choices and find out your who your s
 - **mongoose / mongodb (storage on mlab)** - First of all I used mongodb because it's less strict in its usage than SQL. Also since I was already somewhat familiar with json I figured it'd be easier for me to work with. On top of that I used mongoose, because of my familiarity with JavaScript. Using mongoose felt more like working with objects to me and that made it more intuitive to use.
 Last of all I used mlab so I could use this application without a locally stored database, which made it easy to test for other people without having them install a local database and add my pre-existing users.
 - **bcrypt** - used for hashing the passwords stored on mlab
+- **multer** - profile pictures
 
 ## Structure
 ![Model/view/controller](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MVC-Process.svg/500px-MVC-Process.svg.png)

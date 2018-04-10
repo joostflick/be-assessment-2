@@ -1,7 +1,11 @@
 <%- include('head.ejs') %>
 <body>
   <section class='user'>
+    <% if(!user.image){ %>
     <img src="/images/Person-placeholder.jpg" alt="profile picture">
+    <% } else { %>
+    <img src="/images/<%= user.image %>" alt="profile picture">
+    <% } %>
     <h3><%= user.first_name + " " + user.last_name%></h3>
     <p><%= user.gender %></p>
     <p>You and <%= user.first_name %> are connected!</p>

@@ -1,10 +1,12 @@
 var User = require('../models/user');
 var bcrypt = require('bcrypt');
+var multer  = require('multer');
 
 //Register function
 function register(req, res) {
   //Get the form data and call them user
   var user = req.body;
+  var image = req.file.filename;
   //Check if the username already exists, and if thats the case tell the user.
   return User.findOne({
     username: user.username
@@ -17,6 +19,8 @@ function register(req, res) {
     } else {
       //Otherwise hash the password (auto generated salt and 10 iterations) and create a user with the input from the form
       user.password = bcrypt.hashSync(user.password, 10);
+      //Assign profile picture
+      user.image = image;
       User.create(user, function(err, newUser) {
         if (err) {
           return res.sendStatus(400);

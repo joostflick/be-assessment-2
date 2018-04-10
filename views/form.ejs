@@ -1,7 +1,7 @@
 <%- include('head.ejs') %>
   <body>
     <div class="container">
-    <form class="addUser" action="/register" method="POST">
+    <form class="addUser" action="/register" method="POST" enctype="multipart/form-data">
       <h1>Sign up</h1>
       Username: <br>
       <input type="text" name="username" value="">
@@ -15,6 +15,8 @@
       <input type="radio" name="gender" value="male" checked> Male<br>
       <input type="radio" name="gender" value="female"> Female<br>
       <input type="radio" name="gender" value="other"> Other<br>
+      <br> Profile picture: <br>
+      <input type="file" name="image" accept="image/*">
       <button type="submit">Submit</button>
     </form>
     </div>

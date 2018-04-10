@@ -5,6 +5,8 @@ var userController = require('../controllers/authentication');
 var User = require('../models/user')
 var choicesController = require('../controllers/choices');
 var matchesController = require('../controllers/matches');
+var multer  = require('multer');
+var upload = multer({dest: 'public/images'});
 
 //Render index and give it req.session to show/hide items based on user status
 router.get('/', function(req, res, next) {
@@ -84,11 +86,12 @@ router.get('/matches', matchesController.findMatches);
 router.get('/connections', matchesController.getConnections);
 
 //Post requests that are forwarded to a controller
-router.post('/register', userController.register);
+router.post('/register', upload.single('image'), userController.register);
 router.post('/login', userController.login);
 router.post('/choices', choicesController.addChoices);
 router.post('/user:id', matchesController.addConnection);
 router.post('/remove:id', matchesController.removeConnection);
+
 
 
 module.exports = router;
