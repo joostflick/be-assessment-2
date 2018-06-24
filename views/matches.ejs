@@ -1,10 +1,14 @@
 <%- include('head.ejs') %>
 <body>
   <h1>Your matches</h1>
-  <section class='userContainer'>
+  <% var i = 0; %>
 
-<% matches.forEach(function (user){ %>
+  <section class='userContainer'>
+<% matches.forEach(function (user){%>
+  <% i++ %>
+  <% console.log(i) %>
   <section class='user'>
+    <div class='userData' id='user<%=i%>'>
     <% if(!user.image){ %>
     <img src="/images/Person-placeholder.jpg" alt="profile picture">
     <% } else { %>
@@ -13,10 +17,31 @@
     <h3><%= user.first_name + " " + user.last_name%></h3>
     <p><%= user.gender %></p>
     <a href="/user/<%=user._id%>">View</a>
+    <p>Unwanted match?</p>
+  </div>
+  <button id='<%=i%>' onClick="hide(this.id)">Hide this match</button>
   </section>
 <% }); %>
 </section>
 <a href="/">Go back to home</a>
 </body>
-
+<script type="text/javascript">
+var amountItems = document.getElementsByClassName('user').length;
+var hiddenArray = [];
+hiddenArray.length = amountItems;
+hiddenArray.fill(false, 0, amountItems);
+function hide(id){
+    console.log(id);
+    if(hiddenArray[id - 1] === false){
+        document.getElementById(id).innerHTML = "Unhide this match";
+        document.getElementById('user' + id).style.display = "none";
+        hiddenArray[id - 1] = true;
+        console.log('open')
+      } else { document.getElementById(id).innerHTML = "Hide this match";
+      document.getElementById('user' + id).style.display = "initial";
+      console.log('close')
+      hiddenArray[id - 1] = false;
+    }
+}
+</script>
 <%- include('footer.ejs') %>

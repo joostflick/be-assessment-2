@@ -6,7 +6,13 @@ var multer  = require('multer');
 function register(req, res) {
   //Get the form data and call them user
   var user = req.body;
-  var image = req.file.filename;
+  try {
+    console.log(req.file.filename);
+    var image = req.file.filename;
+  } catch(err) {
+    console.log(err);
+    var image = 'Person-placeholder.jpg';
+  }
   //Check if the username already exists, and if thats the case tell the user.
   return User.findOne({
     username: user.username
