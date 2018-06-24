@@ -1,4 +1,5 @@
 <%- include('head.ejs') %>
+<!-- script geschreven door dropbox om de sterkte van een wachtwoord te analyseren-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
   <body>
     <div class="container">
@@ -34,18 +35,21 @@
   3: "Good",
   4: "Strong"
 }
+
+//Elementen uit de dom halen
 var password = document.getElementById('password');
 var meter = document.getElementById('password-strength-meter');
 var text = document.getElementById('password-strength-text');
 
+//kijken of er bij de password input getypt wordt
 password.addEventListener('input', function() {
   var val = password.value;
   var result = zxcvbn(val);
 
-  // Update the password strength meter
+  // strength meter aanpassen elke keer als er iets verandert wordt
   meter.value = result.score;
 
-  // Update the text indicator
+  // Text aanpassen bij elke verandering
   if (val !== "") {
     text.innerHTML = "Strength: " + strength[result.score]; 
   } else {
